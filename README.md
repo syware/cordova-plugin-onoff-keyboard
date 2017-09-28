@@ -33,3 +33,14 @@ KeyboardPlugin.show();
 // Hide keyboard
 KeyboardPlugin.hide()();
 ```
+
+## License
+
+This software is released under the [Apache 2.0 License][apache2_license].
+
+© 2017 [Syware Sàrl][syware]
+
+[cordova]: https://cordova.apache.org
+[CLI]: http://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-line%20Interface
+[apache2_license]: http://opensource.org/licenses/Apache-2.0
+[syware]: https://www.syware.ch
