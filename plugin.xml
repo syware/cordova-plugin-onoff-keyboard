@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-onoff-keyboard" version="1.0.0">
+    <name>Cordova Plugin To show/hide soft keyboard</name>
+    <description></description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,keyboard,softkeyboard</keywords>
+
+    <engines>
+      <engine name="cordova" version=">=3.2.0" />
+    </engines>
+
+    <!-- android -->
+    <platform name="android">
+      <js-module src="www/plugin.js" name="plugin">
+        <runs/>
+
+        <!-- This is the window variable name you want, like window.MyCordovaPlugin -->
+        <clobbers target="KeyboardPlugin" />
+      </js-module>
+      <config-file target="res/xml/config.xml" parent="/*">
+        <feature name="KeyboardPlugin">
+          <param name="android-package" value="ch.syware.KeyboardPlugin" />
+          <param name="onload" value="true" />
+        </feature>
+      </config-file>
+
+      <source-file src="src/android/KeyboardPlugin.java" target-dir="src/ch/syware/keyboardplugin" />
+    </platform>
+
+</plugin>

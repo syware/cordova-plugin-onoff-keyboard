@@ -1,0 +1,22 @@
+{
+  "name": "cordova-plugin-onoff-keyboard",
+  "version": "1.0.0",
+  "cordova": {
+    "id": "cordova-plugin-onoff-keyboard",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/syware/cordova-plugin-onoff-keyboard.git"
+  },
+  "keywords": [
+    "cordova",
+    "keyboard",
+    "softkeyboard"
+  ],
+  "author": "Syware Sàrl",
+  "license": "Apache 2.0",
+  "description": "Cordova Plugin To show/hide soft keyboard"
+}
