@@ -10,32 +10,31 @@ import org.json.JSONException;
 
 public class KeyboardPlugin extends CordovaPlugin {
 
-  private InputMethodManager imm;
-  private Boolean status;
-  private Context context;
+  @Override
+  public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+    super.initialize(cordova, webView);
+  }
 
   @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-    Activity activity = this.cordova.getActivity();
-    InputMethodManager imm = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-
-    View view;
-    try {
-        view = (View)webView.getClass().getMethod("getView").invoke(webView);
-    }
-    catch (Exception e){
-        view = (View)webView;
-    }
-
     if(action.equals("show")){
-        imm.showSoftInput(view, 0);
-        callbackContext.success();
+        ((InputMethodManager) cordova.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(0, InputMethodManager.HIDE_IMPLICIT_ONLY);
         return true;
     }
     else if(action.equals("hide")){
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        callbackContext.success();
-        return true;
+      cordova.getThreadPool().execute(new Runnable() {
+        public void run() {
+          InputMethodManager inputManager = (InputMethodManager) cordova.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+          View v = cordova.getActivity().getCurrentFocus();
+
+          if (v == null) {
+              // Nothing to do no current focus
+          } else {
+              inputManager.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+          }
+        }
+      });
+      return true;
     }
     callbackContext.error(action + " is not a supported action");
     return false;
